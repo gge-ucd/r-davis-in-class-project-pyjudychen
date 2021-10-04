@@ -28,3 +28,14 @@ class(surveys['species_id'])
 class(surveys[, 'species_id'])
 
 surveys$species_id # output: vector (preferalbe option)
+
+## tidyverse
+# install.packages('tidyverse')
+library(tidyverse) # fancier data.frame
+surveys_t = read_csv('data/portal_data_joined.csv')
+View(surveys_t)
+class(surveys_t) # table
+class(surveys) # data.frame
+
+surveys[, 1]
+surveys_t[, 1]
