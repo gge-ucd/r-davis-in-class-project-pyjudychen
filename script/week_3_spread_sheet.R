@@ -8,6 +8,9 @@ tail(surveys) # look at bottom 6 rows of data
 View(surveys) # open data in another tab
 str(surveys) # view the structure of data
 summary(surveys)
+length(unique(surveys$species)) # How many species have been recorded during these surveys?
+#table(surveys$species)
+sum(!duplicated(surveys$species))
 
 ## Index (row first, then column)
 surveys[1, 1] # first row, first column
@@ -27,7 +30,7 @@ surveys[, 'species_id'] # output: vector
 class(surveys['species_id'])
 class(surveys[, 'species_id'])
 
-surveys$species_id # output: vector (preferalbe option)
+surveys$species_id # output: vector (preferable option)
 
 ## tidyverse
 # install.packages('tidyverse')
@@ -39,3 +42,13 @@ class(surveys) # data.frame
 
 surveys[, 1]
 surveys_t[, 1]
+
+species_factor = factor(surveys$species)
+typeof(species_factor) # integer
+class(species_factor) # factor
+levels(species_factor)
+
+survey200 = surveys[200, ]
+surveys_last = tail(surveys, 1)
+surveys_middle = surveys[nrow(surveys)/2, ]
+survey_head = surveys[-(7:nrow(surveys)), ]
