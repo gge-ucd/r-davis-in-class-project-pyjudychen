@@ -9,7 +9,11 @@ surveys = mutate(surveys, hindfoot_size =
                    ifelse(surveys$hindfoot_length < mean(surveys$hindfoot_length, na.rm = TRUE),
                           'small', 'big'))
 surveys$hindfoot_size
-
+surveys = surveys %>%
+  filter(!is.na(weight)) %>% 
+  mutate(weight_cat = case_when(weight > mean(weight) ~ 'big',
+                                weight < mean(weight) ~ 'small'))
+colnames(surveys)
 # Joining two dataframes
 tail = read_csv('data/tail_length.csv')
 str(tail)
@@ -40,4 +44,14 @@ View(long_survey) # NA is included
 
 long_surveys = long_surveys %>%
   filter(!is.na(mean_weight))
-  
+
+# Challenge
+summary(iris)
+iris = iris %>% 
+  mutate(iris, pd_len_cat = 
+  case_when(
+            Petal.Length < summary(Petal.Length)[2] ~ 'small', 
+            Petal.Length > summary(Petal.Length)[2] & Petal.Length < summary(Petal.Length)[5] ~ 'medium', 
+            Petal.Length > summary(Petal.Length)[5] ~ 'large'
+            ))
+head(iris)
