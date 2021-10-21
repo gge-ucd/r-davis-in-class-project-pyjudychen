@@ -7,7 +7,7 @@ colnames(surveys)
 surveys_weight = surveys %>%
   filter(weight > 30 & weight < 60) %>%
   head()
-
+# shortcut ctrl+shift+m = %>% 
 # 3. Create a new tibble showing the maximum weight for each species 
 # + sex combination and name it biggest_critters.
 
