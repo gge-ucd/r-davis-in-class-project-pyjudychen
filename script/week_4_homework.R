@@ -46,4 +46,3 @@ surveys_avg_weight = surveys %>%
 #+sex combination
 surveys_above_avg = surveys_avg_weight %>%
   mutate(above_avg = weight > avg_weight)
-
