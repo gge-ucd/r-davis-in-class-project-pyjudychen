@@ -5,7 +5,7 @@ surveys = read_csv('data/portal_data_joined.csv')
 #with a column for genus and a column named after every plot type,
 #with each of these columns containing the mean hindfoot length of animals 
 #in that plot type and genus.
-colnames(surveys)
+
 surveys_wide = surveys %>% 
   filter (!is.na(hindfoot_length)) %>%
   group_by(genus, plot_type) %>%
