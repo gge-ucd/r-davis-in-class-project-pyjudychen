@@ -45,13 +45,30 @@ View(long_survey) # NA is included
 long_surveys = long_surveys %>%
   filter(!is.na(mean_weight))
 
-# Challenge
+# Challenge (conditional statement)
 summary(iris)
 iris = iris %>% 
   mutate(iris, pd_len_cat = 
   case_when(
-            Petal.Length < summary(Petal.Length)[2] ~ 'small', 
-            Petal.Length > summary(Petal.Length)[2] & Petal.Length < summary(Petal.Length)[5] ~ 'medium', 
+            Petal.Length <= summary(Petal.Length)[2] ~ 'small', 
+            Petal.Length > summary(Petal.Length)[2] & Petal.Length <= summary(Petal.Length)[5] ~ 'medium', 
             Petal.Length > summary(Petal.Length)[5] ~ 'large'
             ))
 head(iris)
+
+# Challenge (Reshaping with pivot functions)
+surveys_plt_id_year = surveys %>% 
+  group_by(plot_id, year) %>% 
+  summarize(n_genera = n_distinct(genus)) %>% 
+  pivot_wider(names_from = 'year', values_from = 'n_genera')
+
+#Another way to solve challenge
+temp_df = surveys %>% group_by(year,plot_id) %>% tally()
+temp_df = temp_df %>% ungroup()
+
+pivot_wider(temp_df)
+pivot_wider(temp_df,names_from = 'year',values_from = 'n')
+
+pivot_wider(data = surveys,id_cols = c('plot_id'),
+            names_from = year,values_fn = n)
+pivot_wider(temp_df,id_cols = 'plot_id',names_from = 'year',values_from = 'n')
