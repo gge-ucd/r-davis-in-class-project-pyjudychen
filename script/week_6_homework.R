@@ -7,11 +7,21 @@ gapminder <- read_csv("https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv") #O
 # pipes! (aka, try not to create intermediate dataframes)
 gapminder_avg_lifeExp = gapminder %>% 
   filter(!is.na(lifeExp)) %>% 
-  group_by(country) %>% 
+  group_by(continent, year) %>% 
   summarize(avg_lifeExp = mean(lifeExp))
-  
-ggplot(data = gapminder_avg_lifeExp, mapping = aes(x=gapminder$year, y=avg_lifeExp, group_by(continent)))+
-  geom_point(aes(color = gapminder$continent))
+
+ggplot(gapminder_avg_lifeExp, x = year, y = avg_lifeExp, group = continent) +
+  geom_point(aes(x = year, y = avg_lifeExp, color = continent))+
+  geom_line(aes(x = year, y = avg_lifeExp,color = continent))
+
+# Piping way  
+gapminder %>% 
+  filter(!is.na(lifeExp)) %>% 
+  group_by(continent, year) %>% 
+  summarize(avg_lifeExp = mean(lifeExp)) %>% 
+  ggplot() +
+  geom_point(aes(x = year, y = avg_lifeExp, color = continent))+
+  geom_line(aes(x = year, y = avg_lifeExp,color = continent))
 
 # 2. Look at the following code and answer the following questions. 
 # What do you think the scale_x_log10() line of code is achieving? 
