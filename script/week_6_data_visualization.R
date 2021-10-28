@@ -53,3 +53,42 @@ ggplot(data = yearly_counts, mapping = aes(x = year, y = n, group = species_id))
 ggplot(data = yearly_counts, mapping = aes(x = year, y = n, group = species_id))+
   geom_line()+
   theme_map()
+
+# Challenge
+# Use what you just learned to create a scatter plot of weight 
+# and species_id with weight on the Y-axis, and species_id on the X-axis. 
+# Have the colors be coded by plot_type. Is this a good way to show 
+# this type of data? What might be a better graph?
+ggplot(data = surveys_complete, mapping = aes(x=species_id, y=weight)) +
+  geom_point(aes(color = plot_type))+
+  facet_wrap(~plot_type)
+
+# Challenge
+# Make a new plot to explore the distrubtion of hindfoot_length just 
+# for species NL and PF. Overlay a jitter plot of the hindfoot lengths 
+# of each species by a boxplot. Then, color the datapoints according to 
+# the plot from which the sample was taken.
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight))+
+  scale_y_log10()+
+  geom_violin()
+
+species_nl_pf = filter(surveys_complete, species_id == 'NL'|species_id == 'PF')
+
+ggplot(data = species_nl_pf, mapping = aes(x = species_id, y = hindfoot_length))+
+  scale_y_log10()+
+  geom_boxplot()
+
+surveys_complete %>%
+  # inclusive is & vs "or" |
+  filter(species_id == "NL" | species_id == "PF") %>%
+  mutate(plot_factor = as.factor(plot_id)) %>%
+  ggplot(mapping = aes(x = species_id, y = hindfoot_length)) +
+  geom_boxplot(alpha = 0.1) +
+  geom_jitter(alpha = 0.3, mapping = aes(color = plot_factor))
+
+surveys_complete %>%
+  # inclusive is & vs "or" |
+  filter(species_id == "NL" | species_id == "PF") %>%
+  ggplot(mapping = aes(x = species_id, y = hindfoot_length)) +
+  geom_boxplot(alpha = 0.1) +
+  geom_jitter(alpha = 0.3, mapping = aes(color = as.factor(plot_id)))
