@@ -37,14 +37,15 @@ ggplot(data = gapminder, mapping = aes(x=gdpPercap, y=lifeExp, size = pop)) +
   geom_smooth(method = 'lm', color = 'black', linetype = 'dashed') + #(1) smoothing line comes after the points. (2)adds confidence bands on the smooth
   theme_bw()
 
-# 3. Create a boxplot that shows the life expectency 
+# 3. Create a boxplot that shows the life expectancy 
 # for Brazil, China, El Salvador, Niger, and the United States, 
-# with the data points in the backgroud using geom_jitter. 
+# with the data points in the background using geom_jitter. 
 # Label the X and Y axis with "Country" and "Life Expectancy" and 
 # title the plot "Life Expectancy of Five Countries".
 
 gapminder_countries = 
-  filter(gapminder, country == 'Brazil'|country == 'China'|country == 'El Salvador'|country == 'Niger'|country =='United States')
+  filter(gapminder, country %in% c('Brazil','China', 'El Salvador','Niger', 'United States'))
+
 ggplot(data = gapminder_countries, mapping = aes(x=country, y=lifeExp, group = country))+
   geom_boxplot()+
   scale_x_discrete(name ="Country")+

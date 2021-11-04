@@ -10,4 +10,11 @@ colnames(diamonds)
 diamonds_group = diamonds %>% 
   group_by(cut) %>% 
   summarize(avg_price = mean(price))
-# Visualization tips
+
+# Non-visual data interaction
+# Publishing Plots: cowplot
+#install.packages('cowplot')
+library(cowplot)
+plot.diamonds = barplot()
+plot.cars
+# Saving Figures and Plots
