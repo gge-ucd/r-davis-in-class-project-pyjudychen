@@ -1,5 +1,5 @@
 library(tidyverse)
-gapminder <- read_csv("https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv") #ONLY change the "data" part of this path if necessary
+gapminder = read_csv("https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv") #ONLY change the "data" part of this path if necessary
 
 # 1. Calculates mean life expectancy on each continent. 
 # Then create a plot that shows how life expectancy has changed 
@@ -12,7 +12,8 @@ gapminder_avg_lifeExp = gapminder %>%
 
 ggplot(gapminder_avg_lifeExp, x = year, y = avg_lifeExp, group = continent) +
   geom_point(aes(x = year, y = avg_lifeExp, color = continent))+
-  geom_line(aes(x = year, y = avg_lifeExp,color = continent))
+  geom_line(aes(x = year, y = avg_lifeExp,color = continent))+
+  theme_classic()
 
 # Piping way  
 gapminder %>% 
@@ -32,15 +33,15 @@ gapminder %>%
 # a visual feature of the plot?
 ggplot(data = gapminder, mapping = aes(x=gdpPercap, y=lifeExp, size = pop)) + 
   geom_point(alpha = 0.2, aes(color = continent)) + 
-  scale_x_log10()+
-  geom_smooth(method = 'lm', color = 'black', linetype = 'dashed') +
+  scale_x_log10()+ # log10 the gdpPercap value
+  geom_smooth(method = 'lm', color = 'black', linetype = 'dashed') + #(1) smoothing line comes after the points. (2)adds confidence bands on the smooth
   theme_bw()
 
 # 3. Create a boxplot that shows the life expectency 
 # for Brazil, China, El Salvador, Niger, and the United States, 
 # with the data points in the backgroud using geom_jitter. 
-# Label the X and Y axis with “Country” and “Life Expectancy” and 
-# title the plot “Life Expectancy of Five Countries”.
+# Label the X and Y axis with "Country" and "Life Expectancy" and 
+# title the plot "Life Expectancy of Five Countries".
 
 gapminder_countries = 
   filter(gapminder, country == 'Brazil'|country == 'China'|country == 'El Salvador'|country == 'Niger'|country =='United States')
@@ -49,4 +50,5 @@ ggplot(data = gapminder_countries, mapping = aes(x=country, y=lifeExp, group = c
   scale_x_discrete(name ="Country")+
   scale_y_continuous(name="Life Expectancy", limits=c(40, 80))+
   labs(title="Life Expectancy of Five Countries")+
-  geom_jitter(alpha = 1)
+  geom_jitter(alpha = 0.5, color = 'blue')+
+  theme_classic()
