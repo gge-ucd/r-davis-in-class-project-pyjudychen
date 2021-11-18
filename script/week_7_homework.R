@@ -10,8 +10,9 @@ gapminder_2002_2007 = gapminder %>%
 ggplot(gapminder_2002_2007)+
   facet_wrap(~continent, scale = 'free')+
   geom_bar(aes(x = reorder(country, popDiff), y = popDiff), stat = 'identity')+
+  geom_col(aes(x = reorder(country, popDiff), y = popDiff, fill = continent))+
   labs(x = 'Country', y = 'Change in Population between 2002 and 2007')+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 45, size = 2))+
-  coord_flip()
-  
+  theme(legend.position='none')
+
