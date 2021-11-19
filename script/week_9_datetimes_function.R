@@ -50,7 +50,7 @@ F_to_K(32)
 # Gapmind data set: Average GDP per capita over a range of years
 library(tidyverse)
 #install.packages('gapminder')
-library('gapminder')
+library(gapminder)
 summary(gapminder)
 gapminder %>% 
   filter(country == 'Canada', year %in% 1970:1980) %>%
@@ -64,3 +64,16 @@ avgGDP = function(cntry, yr.range){
 
 avgGDP(cntry = 'Iran', yr.range = 1985:1990)    
 avgGDP(cntry = 'Taiwan', yr.range = 1900:2000)
+
+unique(gapminder$country)[1:10]
+for (i in unique(gapminder$country)[1:10]){
+  print(avgGDP(cntry = i, yr.range = 1985:1990))
+}
+
+output = data.frame()
+for (i in unique(gapminder$country)[1:10]){
+  df = data.frame(country = i, output = avgGDP(cntry = i, yr.range = 1985:1990))
+  #colnames
+  output = rbind(df, output)
+}
+output
