@@ -34,7 +34,7 @@ plot1 = ggplot(flight_joined, aes(x = dep_delay, y = precip))+
   theme_classic()
 
 ggsave("C:/Users/user/Desktop/R_DAVIS_2021/r-davis-in-class-project-pyjudychen/script/plot/Relationship of delay and precip.png", plot1, width = 6, height = 4, units = "in", dpi = 300)
-# Create a figure that has date on the x axis and each day's mean departure delay on 
+# 2. Create a figure that has date on the x axis and each day's mean departure delay on 
 # the y axis. Plot only months September through December. 
 # Somehow distinguish between airline carriers (the method is up to you). 
 # Again, save your final product into the "plot" folder.
@@ -56,6 +56,6 @@ plot2 = ggplot(flight_joined_sep_dec, aes(x = date, y = mean_dely))+
 
 ggsave("C:/Users/user/Desktop/R_DAVIS_2021/r-davis-in-class-project-pyjudychen/script/plot/mean_dely_date.png", plot2, width = 6, height = 4, units = "in", dpi = 300)
 
-# Create a dataframe with these columns: date (year, month and day), 
-# mean_temp, where each row represents the airport, based on airport code. 
+# 3. Create a dataframe with these columns: date (year, month and day), 
+# mean_temp, where each row represents the airport, based on airport code (origin). 
 # Save this is a new csv into you data folder called mean_temp_by_origin.csv
