@@ -59,3 +59,5 @@ ggsave("C:/Users/user/Desktop/R_DAVIS_2021/r-davis-in-class-project-pyjudychen/s
 # 3. Create a dataframe with these columns: date (year, month and day), 
 # mean_temp, where each row represents the airport, based on airport code (origin). 
 # Save this is a new csv into you data folder called mean_temp_by_origin.csv
+new_df = data.frame(flight_joined$origin, flight_joined$year, flight_joined$month, flight_joined$day)
+write.csv(new_df, 'C:/Users/user/Desktop/R_DAVIS_2021/r-davis-in-class-project-pyjudychen/data/mean_temp_by_origin.csv')
