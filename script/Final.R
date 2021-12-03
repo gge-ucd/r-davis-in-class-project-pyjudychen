@@ -62,7 +62,7 @@ ggsave("C:/Users/user/Desktop/R_DAVIS_2021/r-davis-in-class-project-pyjudychen/s
 # Save this is a new csv into you data folder called mean_temp_by_origin.csv
 new_df = data.frame(flight_joined$origin, flight_joined$year, flight_joined$month, flight_joined$day)
 write.csv(new_df, 'C:/Users/user/Desktop/R_DAVIS_2021/r-davis-in-class-project-pyjudychen/data/mean_temp_by_origin.csv')
-=======
+
 # Load library
 library(dplyr)
 library(ggplot2)
@@ -126,3 +126,10 @@ ggsave("C:/Users/user/Desktop/R_DAVIS_2021/r-davis-in-class-project-pyjudychen/s
 # Save this is a new csv into you data folder called mean_temp_by_origin.csv
 new_df = data.frame(flight_joined$origin, flight_joined$year, flight_joined$month, flight_joined$day)
 write.csv(new_df, 'C:/Users/user/Desktop/R_DAVIS_2021/r-davis-in-class-project-pyjudychen/data/ean_temp_by_origin.csv')
+
+# 4. Make a function that can: (1) convert hours to minutes; and 
+#(2) convert minutes to hours (i.e., it’s going to require some sort of 
+#conditional setting in the function that determines which direction the 
+#conversion is going). Use this function to convert departure delay 
+#(currently in minutes) to hours and then generate a boxplot of departure delay times by carrier. 
+#Save this function into a script called “customFunctions.R” in your scripts/code folder.
