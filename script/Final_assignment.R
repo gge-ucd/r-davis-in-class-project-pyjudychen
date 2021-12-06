@@ -150,16 +150,20 @@ for (i in 1:length(flight_joined$dep_delay)){
 flight_joined_time_con = flight_joined %>% 
   mutate(hr_dep_delay = hour_dep_delay)
 
+# 5.The goal is to visualize delays by carrier. 
+# Do (at least) 5 things to improve this plot by changing, adding, 
+# or subtracting to this plot. The sky's the limit here,
+#remember we often reduce data to more succinctly communicate things.
 plot3_origin = ggplot(flight_joined_time_con, aes(x = carrier, y = hr_dep_delay, fill = carrier))+
   geom_boxplot()+
   coord_flip()
 
-plot3_edited = ggplot(flight_joined_time_con, aes(x = carrier, y = hr_dep_delay))+ #remove legend
+plot3_edited = ggplot(flight_joined_time_con, aes(x = carrier, y = hr_dep_delay))+ # (1) remove legend
   geom_boxplot(notchwidth = 0.8, notch=FALSE,
-               color="navy", fill="navy", alpha = 0.2, #change box color
-               outlier.colour="tomato", outlier.fill="tomato", outlier.size = 2, outlier.alpha = 0.2)+ #change color of outliers
-  xlab('Carrier')+ #edit x label
-  ylab('Departure delay time (hr)')+ #edit y label
+               color="navy", fill="navy", alpha = 0.2, # (2) change box color
+               outlier.colour="tomato", outlier.fill="tomato", outlier.size = 2, outlier.alpha = 0.2)+ # (3) change color of outliers
+  xlab('Carrier')+ # (4) edit x label
+  ylab('Departure delay time (hr)')+ # (5) edit y label
   coord_flip()+ #flip x and y axis
-  theme_classic() #change theme
+  theme_classic() # (6) change theme
 ggsave("C:/Users/user/Desktop/R_DAVIS_2021/r-davis-in-class-project-pyjudychen/script/plot/boxplot_delays_by_carrier.png", plot3_edited, width = 6, height = 4, units = "in", dpi = 300)
