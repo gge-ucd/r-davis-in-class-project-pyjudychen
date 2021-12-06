@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Load library
 library(dplyr)
 library(ggplot2)
@@ -133,3 +132,34 @@ write.csv(new_df, 'C:/Users/user/Desktop/R_DAVIS_2021/r-davis-in-class-project-p
 #conversion is going). Use this function to convert departure delay 
 #(currently in minutes) to hours and then generate a boxplot of departure delay times by carrier. 
 #Save this function into a script called “customFunctions.R” in your scripts/code folder.
+time_convert = function(time, unit){
+  if (unit == 'minute'){ans = time/60}
+  else {ans = time*60}
+  return (ans)
+}
+
+save(time_convert, file = "C:/Users/user/Desktop/R_DAVIS_2021/r-davis-in-class-project-pyjudychen/script/customFunctions.R")
+
+time_convert(flight_joined$dep_delay[1], 'minute')
+
+hour_dep_delay = rep(NA, nrow(flight_joined))
+for (i in 1:length(flight_joined$dep_delay)){
+  hour_dep_delay[i] = time_convert(flight_joined$dep_delay[i], 'minute')
+} 
+
+flight_joined_time_con = flight_joined %>% 
+  mutate(hr_dep_delay = hour_dep_delay)
+
+plot3_origin = ggplot(flight_joined_time_con, aes(x = carrier, y = hr_dep_delay, fill = carrier))+
+  geom_boxplot()+
+  coord_flip()
+
+plot3_edited = ggplot(flight_joined_time_con, aes(x = carrier, y = hr_dep_delay))+ #remove legend
+  geom_boxplot(notchwidth = 0.8, notch=FALSE,
+               color="navy", fill="navy", alpha = 0.2, #change box color
+               outlier.colour="tomato", outlier.fill="tomato", outlier.size = 2, outlier.alpha = 0.2)+ #change color of outliers
+  xlab('Carrier')+ #edit x label
+  ylab('Departure delay time (hr)')+ #edit y label
+  coord_flip()+ #flip x and y axis
+  theme_classic() #change theme
+ggsave("C:/Users/user/Desktop/R_DAVIS_2021/r-davis-in-class-project-pyjudychen/script/plot/boxplot_delays_by_carrier.png", plot3_edited, width = 6, height = 4, units = "in", dpi = 300)
